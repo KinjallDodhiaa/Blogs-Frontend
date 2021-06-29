@@ -9,8 +9,6 @@ import AddPosts from './components/addPosts';
 import Posts from './components/posts';
 import ShowPosts from './components/showPosts';
 import EditPosts from './components/editPosts';
-import MostPopularBlog1 from './components/mostPopularBlog1';
-import MostPopularBlog2 from './components/mostPopularBlog2';
 
 const axios = require("axios").default;
 
@@ -45,15 +43,6 @@ const App = () => {
         </Route>
         <Route path="/showPosts">
           <ShowPosts show={posts} sendGetRequest={sendGetRequest} />
-        </Route>
-        <Route path="/mostPopularBlog1">
-          <MostPopularBlog1 />
-        </Route>
-        <Route path="/mostPopularBlog2">
-          <MostPopularBlog2 />
-        </Route>
-        <Route path="/mostPopularBlog3">
-          <MostPopularBlog2 />
         </Route>
 
         <Route path="/posts/:id">

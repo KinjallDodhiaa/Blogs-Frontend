@@ -24,8 +24,9 @@ const ShowPosts = (props) => {
               <Link to="/addPosts" className="nav-link">
                 Write Blog
               </Link>
-              <button onClick={signOutOnClick} className="nav-link">Sign Out</button>
-
+              <button onClick={signOutOnClick} className="nav-link">
+                Sign Out
+              </button>
             </nav>
           </div>
         </div>

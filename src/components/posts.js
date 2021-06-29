@@ -31,9 +31,6 @@ const Posts = (props) => {
 
   }
 
-  const signOutOnClick = () => {
-    localStorage.removeItem("token")
-  }
 
 
 
@@ -64,7 +61,6 @@ const Posts = (props) => {
                     >
                       Write Blog
                     </Link>
-                    <button onClick={signOutOnClick} className="nav-link-post">Sign Out</button>
 
 
                   </li>

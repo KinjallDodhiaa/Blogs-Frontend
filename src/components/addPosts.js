@@ -85,8 +85,9 @@ const AddPosts = (props) => {
             <Link to="/addPosts" className="nav-link">
               Write Blog
             </Link>
-            <button onClick={signOutOnClick} className="nav-link">Sign Out</button>
-
+            <button onClick={signOutOnClick} className="nav-link">
+              Sign Out
+            </button>
           </nav>
         </div>
         <>
@@ -103,10 +104,11 @@ const AddPosts = (props) => {
                       </li>
                     ))}
                 </ul>
-              </div> 
-           )}  
+              </div>
+            )}
 
             <form>
+
               <div className="form-group">
                 <label htmlFor="inputTitle">Name</label>
                 <input
@@ -152,7 +154,7 @@ const AddPosts = (props) => {
           </div>
         </>
         <div className="imagesAddPost">
-          <img src="../images/bg-post.jpg" alt='backgroundImageToWritePost'/>
+          <img src="../images/bg-post.jpg" alt="backgroundImageToWritePost" />
         </div>
       </div>
     </section>
