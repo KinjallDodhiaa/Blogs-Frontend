@@ -24,7 +24,7 @@ const AddPosts = (props) => {
     // TODO
     try {
       const response = await axios.post(
-        "http://localhost:3001/posts/",
+        "https://kinjals-blog.herokuapp.com/posts/",
         {
           title: postTitle,
           content: postContent,

@@ -43,7 +43,7 @@ const Home = () => {
       try{
           
         await axios
-          .post("http://localhost:3001/users", userSignup)
+          .post("https://kinjals-blog.herokuapp.com/users", userSignup)
           .then((response) =>
             myStorage.setItem("token", response.headers.auth)
           );
@@ -60,7 +60,7 @@ const Home = () => {
         const submitSignin = async () => {
           try {
          const response =   await axios
-              .post("http://localhost:3001/users/login", {"email":userSignin.email,"password":userSignin.password},)
+           .post("https://kinjals-blog.herokuapp.com/users/login", {"email":userSignin.email,"password":userSignin.password},)
               myStorage.setItem("token", response.headers.auth);
               console.log(response)
           

@@ -17,7 +17,7 @@ const Posts = (props) => {
   const deletePostsOnClick = async (id) =>{
           try {
             axios
-              .delete(`http://localhost:3001/posts/${id}`, {
+              .delete(`https://kinjals-blog.herokuapp.com/posts/${id}`, {
                 headers: {
                   auth: localStorage.getItem("token"),
                 },

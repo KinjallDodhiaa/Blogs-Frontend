@@ -30,7 +30,7 @@ const EditPosts = (props) => {
     var data = { title, content, name };
     try {
       axios
-        .put(`http://localhost:3001/posts/${id}`, data, {
+        .put(`https://kinjals-blog.herokuapp.com/posts/${id}`, data, {
           headers: {
             auth: localStorage.getItem("token"),
           },
