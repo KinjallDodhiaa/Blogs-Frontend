@@ -66,6 +66,11 @@ const AddPosts = (props) => {
     //  setContent("");
   };
 
+  const signOutOnClick = () => {
+    localStorage.removeItem("token")
+  }
+
+
   return (
     <section className="section-1 addPost">
       <div className="main-container">
@@ -80,6 +85,8 @@ const AddPosts = (props) => {
             <Link to="/addPosts" className="nav-link">
               Write Blog
             </Link>
+            <button onClick={signOutOnClick} className="nav-link">Sign Out</button>
+
           </nav>
         </div>
         <>
