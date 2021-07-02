@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Link, Switch, Route, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/react-quill/dist/quill.snow.css";
+import baseUrl from './baseurl'
 
 import Home from './components/home';
 import AddPosts from './components/addPosts';
@@ -23,8 +24,7 @@ const App = () => {
 
   const sendGetRequest = async () => {
     try {
-      const response = await axios
-        .get("https://kinjals-blog.herokuapp.com/posts");
+      const response = await axios.get(baseUrl + "/posts");
       setPosts(response.data);
       console.log(response.data);
     } catch (err) {

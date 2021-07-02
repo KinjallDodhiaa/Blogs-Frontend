@@ -1,8 +1,11 @@
 import React, { useRef, useState } from "react";
+import baseUrl from "../baseurl";
+
 import "../css/style.css";
 import ReactQuill from "react-quill";
 import { Link,useHistory } from "react-router-dom";
 const axios = require("axios").default;
+
 
 const AddPosts = (props) => {
   const [title, setTitle] = useState("");
@@ -11,30 +14,28 @@ const AddPosts = (props) => {
 
   const inputTitleRef = useRef();
   const inputContentRef = useRef();
-  const inputNameRef = useRef();
 
   const handleBody = (e) => {
     console.log(e);
     inputContentRef.current.value = e;
   };
 
-  const addPost = async (postTitle, postContent, postName) => {
+  const addPost = async (postTitle, postContent) => {
 
     console.log("add post log" + postContent);
     // TODO
     try {
       const response = await axios.post(
-        "https://kinjals-blog.herokuapp.com/posts/",
+        baseUrl + "/posts/",
         {
           title: postTitle,
           content: postContent,
-          name: postName,
         },
-         {
-           headers: {
-             auth: localStorage.getItem("token")
-           },
-         }
+        {
+          headers: {
+            auth: localStorage.getItem("token"),
+          },
+        }
       );
      await props.sendGetRequest({ title });
       console.log("response is :" + JSON.stringify(response));
@@ -51,7 +52,6 @@ const AddPosts = (props) => {
       await addPost(
         inputTitleRef.current.value,
         inputContentRef.current.value,
-        inputNameRef.current.value
       );
       setTitle("");
       history.push('/showPosts')
@@ -108,17 +108,10 @@ const AddPosts = (props) => {
             )}
 
             <form>
+              <h1>
+              {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).firstName} 
+              </h1>
 
-              <div className="form-group">
-                <label htmlFor="inputTitle">Name</label>
-                <input
-                  placeholder="please write your name over here..."
-                  ref={inputNameRef}
-                  type="text"
-                  className="form-control border border-dark"
-                  id="inputTitle"
-                />
-              </div>
 
               <div className="form-group">
                 <label htmlFor="inputTitle">Title</label>

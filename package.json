@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
+    "cross-env": "^7.0.3",
     "mdb-ui-kit": "^3.8.0",
     "mdbreact": "^5.0.2",
     "react": "^17.0.2",
@@ -22,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "cross-env NODE_ENV=development react-scripts start"
   },
   "eslintConfig": {
     "extends": [
