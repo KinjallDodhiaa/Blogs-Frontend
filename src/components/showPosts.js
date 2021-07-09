@@ -9,6 +9,7 @@ const ShowPosts = (props) => {
   const [userSignup, setUserSignup] = useState({});
   const [userWriteBlogSignIn, setUserWriteBlogSignIn] = useState({});
   const [passwordShown, setPasswordShown] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const myStorage = window.localStorage;
 
@@ -63,7 +64,7 @@ const ShowPosts = (props) => {
 
       console.log(response);
 
-      window.location.replace("/addPosts");
+      window.location.replace("/");
 
       console.log(userWriteBlogSignIn);
     } catch (error) {
@@ -98,9 +99,19 @@ const ShowPosts = (props) => {
               </button>
             )}
             {localStorage.getItem("token") ? (
-              <button onClick={signOutOnClick} className="nav-link">
-                Sign Out
-              </button>
+              <div className="dropdown">
+                {localStorage.getItem("token") ? (
+                  <button className="nav-link">
+                    <i className="fas fa-user" id="user"></i>
+                    {user && user.firstName}
+                  </button>
+                ) : null}
+                <div className="dropdown-content">
+                  <button onClick={signOutOnClick} className="nav-link">
+                    Sign Out
+                  </button>
+                </div>
+              </div>
             ) : (
               <button onClick={handleWriteBlogsignIn} className="nav-link">
                 Sign In

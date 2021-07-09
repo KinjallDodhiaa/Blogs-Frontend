@@ -3,9 +3,8 @@ import baseUrl from "../baseurl";
 
 import "../css/style.css";
 import ReactQuill from "react-quill";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const axios = require("axios").default;
-
 
 const AddPosts = (props) => {
   const [title, setTitle] = useState("");
@@ -21,7 +20,6 @@ const AddPosts = (props) => {
   };
 
   const addPost = async (postTitle, postContent) => {
-
     console.log("add post log" + postContent);
     // TODO
     try {
@@ -37,7 +35,7 @@ const AddPosts = (props) => {
           },
         }
       );
-     await props.sendGetRequest({ title });
+      await props.sendGetRequest({ title });
       console.log("response is :" + JSON.stringify(response));
     } catch (error) {
       console.log(error);
@@ -48,18 +46,14 @@ const AddPosts = (props) => {
   const addPostsOnClick = async () => {
     // console.log(inputContentRef.current);
     try {
-      
-      await addPost(
-        inputTitleRef.current.value,
-        inputContentRef.current.value,
-      );
+      await addPost(inputTitleRef.current.value, inputContentRef.current.value);
       setTitle("");
-      history.push('/showPosts')
+      history.push("/showPosts");
     } catch (error) {
       console.log("U need to sign in" + error);
-      if(!localStorage.getItem("token")){
-      alert("Please sign in to write post");
-      window.location.replace('/');
+      if (!localStorage.getItem("token")) {
+        alert("Please sign in to write post");
+        window.location.replace("/");
       }
       setErrors(error.response.data);
     }
@@ -67,10 +61,9 @@ const AddPosts = (props) => {
   };
 
   const signOutOnClick = () => {
-    localStorage.removeItem("token")
-    window.location.replace('/')
-  }
-
+    localStorage.removeItem("token");
+    window.location.replace("/");
+  };
 
   return (
     <section className="section-1 addPost">
@@ -110,9 +103,10 @@ const AddPosts = (props) => {
 
             <form>
               <h1 className="welcome">
-              Welcome {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).firstName}
+                Welcome{" "}
+                {localStorage.getItem("user") &&
+                  JSON.parse(localStorage.getItem("user")).firstName}
               </h1>
-
 
               <div className="form-group">
                 <label htmlFor="inputTitle">Title</label>

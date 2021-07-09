@@ -1,21 +1,12 @@
-import axios from 'axios';
-import React from 'react';
-import { useState } from 'react';
-import {
-  Button,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
-  ButtonDropdown,
-} from "reactstrap";
-import { Modal } from "react-bootstrap"
-import { Link } from 'react-router-dom';
-import '../css/style.css'
+import axios from "axios";
+import React from "react";
+import { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "../css/style.css";
 import baseUrl from "../baseurl";
 
-
 const Home = () => {
-
   const [userSignup, setUserSignup] = useState({});
   const [userSignin, setUserSignin] = useState({});
   const [userWriteBlogSignIn, setUserWriteBlogSignIn] = useState({});
@@ -24,7 +15,6 @@ const Home = () => {
   const [dropdownOpen, setOpen] = useState(false);
 
   const toggle = () => setOpen(!dropdownOpen);
-
 
   const myStorage = window.localStorage;
 
@@ -35,27 +25,26 @@ const Home = () => {
   const handlesignUp = () => setsignUp(true);
 
   const [signIn, setsignIn] = useState(false);
-  const handleCloseSignIn = () => setsignIn(false)
+  const handleCloseSignIn = () => setsignIn(false);
   const handlesignIn = () => setsignIn(true);
 
   const [writeBlogSignIn, setwriteBlogSignIn] = useState(false);
   const handleCloseWriteBlogSignIn = () => setwriteBlogSignIn(false);
   const handleWriteBlogsignIn = () => setwriteBlogSignIn(true);
 
-
   const handleChangeSignup = (evt) => {
     setUserSignup({
-      ...userSignup, [evt.target.name]: evt.target.value,
+      ...userSignup,
+      [evt.target.name]: evt.target.value,
     });
-  }
+  };
 
   const handleChangeSignin = (evt) => {
     setUserSignin({
       ...userSignin,
       [evt.target.name]: evt.target.value,
     });
-
-  }
+  };
 
   const handleChangeWriteBlogSignin = (evt) => {
     setUserWriteBlogSignIn({
@@ -64,11 +53,8 @@ const Home = () => {
     });
   };
 
-
   const submitSignup = async () => {
-
     try {
-
       await axios
         .post("https://kinjals-blog.herokuapp.com/users", userSignup)
         .then((response) => {
@@ -77,14 +63,10 @@ const Home = () => {
           console.log("signup" + response.data.firstName);
         });
       window.location.replace("/");
-
-
     } catch (error) {
       console.log(error.response);
-
-
     }
-  }
+  };
 
   const submitSignin = async () => {
     try {
@@ -95,19 +77,15 @@ const Home = () => {
           password: userSignin.password,
         }
       );
-      myStorage.setItem("token", response.headers.auth)
-      myStorage.setItem(
-        "user",
-        JSON.stringify(response.data)
-      );
+      myStorage.setItem("token", response.headers.auth);
+      myStorage.setItem("user", JSON.stringify(response.data));
 
-      console.log(response)
+      console.log(response);
 
       window.location.replace("/");
       console.log(userSignin);
     } catch (error) {
       console.log(error.response);
-
     }
   };
 
@@ -120,21 +98,18 @@ const Home = () => {
           password: userWriteBlogSignIn.password,
         }
       );
-      myStorage.setItem("token", response.headers.auth)
+      myStorage.setItem("token", response.headers.auth);
       myStorage.setItem("user", JSON.stringify(response.data));
 
-      console.log(response)
+      console.log(response);
 
       window.location.replace("/addPosts");
-
 
       console.log(userWriteBlogSignIn);
     } catch (error) {
       console.log(error.response);
-
     }
   };
-
 
   // const togglePassword = () => {
   //   // When the handler is invoked
@@ -143,12 +118,9 @@ const Home = () => {
   // };
 
   const signOutOnClick = () => {
-    localStorage.removeItem("token")
+    localStorage.removeItem("token");
     window.location.replace("/");
-
-  }
-
-
+  };
 
   return (
     <>
@@ -191,62 +163,12 @@ const Home = () => {
                   Sign In
                 </button>
               )}
-
-              {/* {localStorage.getItem("token") ? (
-                <ButtonDropdown
-                  isOpen={dropdownOpen}
-                  toggle={toggle}
-                  className="dropButt"
-                >
-                  <DropdownToggle caret className="dropButt">
-                    {localStorage.getItem("token") ? (
-                      <button className="nav-link">
-                        {user && user.firstName}
-                      </button>
-                    ) : null}
-                  </DropdownToggle>
-                  <DropdownMenu className="dropButt">
-                    <DropdownItem header className="dropButt">
-                      <button onClick={signOutOnClick} className="nav-link">
-                        Sign Out
-                      </button>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </ButtonDropdown>
-              ) : (
-                <button onClick={handlesignIn} className="nav-link">
-                  Sign In
-                </button>
-              )} */}
-
-              {/* {localStorage.getItem("token") ? (
-
-                <button onClick={signOutOnClick} className="nav-link">
-                  Sign Out
-                </button>
-              ) : (
-                <button onClick={handlesignIn} className="nav-link">
-                  Sign In
-                </button>
-              )} */}
             </nav>
           </div>
         </div>
 
         <div className="section-1-banner center">
           <p>Write your own amazing experience</p>
-          {/* <Link to="/addPosts" className="link">
-              Start here
-            </Link> */}
-          {/* <DropdownButton
-            id="dropdown-basic-button"
-            title="Register here"
-            variant="secondary"
-          >
-            <Dropdown.Item className="dropdownButton" onClick={handlesignUp}>
-              Sign Up
-            </Dropdown.Item>
-          </DropdownButton> */}
 
           <button className="register-button" onClick={handlesignUp}>
             Register here
