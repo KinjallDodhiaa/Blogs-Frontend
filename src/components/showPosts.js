@@ -73,6 +73,8 @@ const ShowPosts = (props) => {
 
   const signOutOnClick = () => {
     localStorage.removeItem("token");
+    window.location.replace("/");
+
   };
 
   return (
@@ -95,9 +97,15 @@ const ShowPosts = (props) => {
                 Write Blog
               </button>
             )}
-            <button onClick={signOutOnClick} className="nav-link">
-              Sign Out
-            </button>
+            {localStorage.getItem("token") ? (
+              <button onClick={signOutOnClick} className="nav-link">
+                Sign Out
+              </button>
+            ) : (
+              <button onClick={handleWriteBlogsignIn} className="nav-link">
+                Sign In
+              </button>
+            )}
           </nav>
         </div>
       </div>

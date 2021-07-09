@@ -76,7 +76,6 @@ const EditPosts = (props) => {
 
   const { id } = useParams();
 
-  const [name, setName] = useState();
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
 
@@ -85,7 +84,6 @@ const EditPosts = (props) => {
 
     if (foundPostToEdit && id) {
       console.log(foundPostToEdit);
-      setName(foundPostToEdit.name);
       setTitle(foundPostToEdit.title);
       setContent(foundPostToEdit.content);
     }
@@ -95,8 +93,8 @@ const EditPosts = (props) => {
     setContent(data);
   };
 
-  const updateBlogs = async (title, content, name) => {
-    var data = { title, content, name };
+  const updateBlogs = async (title, content) => {
+    var data = { title, content};
     try {
       axios
         .put(`https://kinjals-blog.herokuapp.com/posts/${id}`, data, {
@@ -142,17 +140,6 @@ const EditPosts = (props) => {
 
         <div className="blog-form">
           <form>
-            <div className="form-group">
-              <label for="inputTitle">Name</label>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="please write your name over here..."
-                type="text"
-                className="form-control border border-dark"
-                id="inputTitle"
-              />
-            </div>
 
             <div className="form-group">
               <label for="inputTitle">Title</label>
@@ -179,7 +166,7 @@ const EditPosts = (props) => {
 
             <button
               onClick={() => {
-                updateBlogs(title, content, name);
+                updateBlogs(title, content);
               }}
               type="button"
               className="btn btn-primary mt-5"

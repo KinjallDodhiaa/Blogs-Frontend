@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Niconne&display=swap");
+
 /* common styles */
 * {
   margin: 0;
@@ -69,6 +71,8 @@ html {
   overflow: hidden;
 }
 
+
+
 .nav-link::before {
   content: "";
   position: absolute;
@@ -86,8 +90,50 @@ html {
   left: 110%;
 }
 
-.modalClass{
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  padding-top: 1rem;
   z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.modalClass {
+  z-index: 1;
+}
+
+.register-button{
+  padding: 1.5rem 3rem;
+  font-size: 2rem;
+  background-color: rgb(58, 56, 56);
+  color: white;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  clip-path: polygon(
+    50% 0%,
+    81% 5%,
+    100% 0,
+    100% 100%,
+    80% 95%,
+    50% 100%,
+    20% 95%,
+    0 100%,
+    0 0,
+    23% 5%
+  );
+  transition: clip-path 0.5s;
+
 }
 /* end of navbar */
 
@@ -104,48 +150,29 @@ html {
   margin: 6rem 0 4rem 0;
 }
 
-#dropdown-basic-button{
-    font-size: 2rem;
-      width: 15rem;
-      text-align: left;
-
-
-}
-
-#dropdown-basic-button::after{
-  display: none;
-}
-
-.dropdownButton{
-  text-align: left;
-  font-size: 2rem;
-  width: 15rem;
-}
-
-
-.modalTitle{
+.modalTitle {
   font-size: 2.6rem;
   font-weight: 900;
 }
 
-.labelClass{
+.labelClass {
   display: block;
   font-size: 1.6rem;
 }
 
-.inputClass{
+.inputClass {
   display: block;
   margin-bottom: 1rem;
   width: 100%;
   height: 2.6rem;
 }
 
-.modalButton{
+.modalButton {
   font-size: 1.6rem;
   padding: 0.6rem;
 }
 
-.modalP{
+.modalP {
   font-size: 1.6rem;
 }
 /* background image */
@@ -254,7 +281,12 @@ html {
   opacity: 0.4;
   object-fit: cover;
   object-position: center;
+}
 
+.welcome {
+  font-family: "Niconne", cursive;
+  font-size: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 /* errors */
@@ -364,26 +396,21 @@ form input {
 /* Responsive */
 
 @media (min-width: 1024px) and (max-width: 1366px) {
-
-    .imagesShowPost img{
+  .imagesShowPost img {
     height: 100%;
   }
 
-  .nav-link{
+  .nav-link {
     right: 15rem;
   }
 
   .imagesAddPost img {
-  width: 100%;
-  object-fit: cover;
-  opacity: 0.4;
-  height: 100vh;
-
-
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+    height: 100vh;
+  }
 }
-
-}
-
 
 @media (min-width: 768px) {
   .nav-link {
@@ -398,14 +425,13 @@ form input {
     margin-top: 20rem;
   }
 
-    .section-2 h1 {
+  .section-2 h1 {
     font-size: 4rem;
   }
 
   .section-2 h2 {
     font-size: 2.5rem;
   }
-
 }
 
 @media (min-width: 540px) {
@@ -427,9 +453,7 @@ form input {
     font-size: 3rem;
     text-align: center;
   }
-
 }
-
 
 @media (min-width: 280px) and (max-width: 653px) {
   .nav-link {
@@ -448,23 +472,21 @@ form input {
     text-align: center;
   }
 
-    .blog-form {
+  .blog-form {
     margin-top: 40rem;
   }
 
   .imagesAddPost img {
-  width: 100%;
-  height: 200vh;
-  object-fit:cover; 
-  opacity: 0.4;
-
-}
+    width: 100%;
+    height: 200vh;
+    object-fit: cover;
+    opacity: 0.4;
+  }
 }
 
 @media (min-width: 320px) and (max-width: 568px) {
   .nav-link {
     right: 0;
-    
   }
 
   .section-1-banner p {
@@ -472,54 +494,41 @@ form input {
     text-align: center;
   }
 
-    .blog-form {
+  .blog-form {
     padding-top: 10rem;
   }
-
-
-  
-
 }
 
-
 @media (min-width: 375px) and (max-width: 812px) {
-  .imagesShowPost img{
+  .imagesShowPost img {
     height: 100%;
   }
 
-  .nav-link{
-    left: 0.5;
+  .nav-link {
+    left: 0;
     margin: 0 0.5rem;
   }
 
-  .nav-link-post{
+  .nav-link-post {
     margin: 0;
     width: 10rem;
     padding: 0;
-
   }
-
-
-
-
 }
 
-
-
 @media (min-width: 726px) and (max-width: 1024px) {
-
-  .nav-link{
+  .nav-link {
     font-size: 1.9rem;
   }
 
-  .imagesAddPost img{
+  .imagesAddPost img {
     object-fit: cover;
     height: 100vh;
   }
 }
 
 @media (max-width: 667px) {
-    .section-2 h1 {
+  .section-2 h1 {
     font-size: 3rem;
   }
 
@@ -530,8 +539,8 @@ form input {
   .blog-form {
     margin-top: 35rem;
   }
-  
-  .nav-link{
+
+  .nav-link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -539,10 +548,9 @@ form input {
     width: 8rem;
   }
 
-    .navbar {
-      right: 1.5rem;
+  .navbar {
+    right: 1.5rem;
   }
-
 
   .section-1-banner p {
     font-size: 2.5rem;
@@ -554,43 +562,34 @@ form input {
     width: 150%;
   }
 
-    .imagesShowPost img{
+  .imagesShowPost img {
     height: 100%;
   }
 
-    .nav-link-post{
+  .nav-link-post {
     margin: 0;
     width: 9rem;
     padding: 0;
-
   }
 
-    .nav-link{
+  .nav-link {
     left: 0.5;
     margin: 0 0.5rem;
   }
-
-
-
-
 }
 
- @media(min-width:540px) and (max-width:720px){
-.imagesAddPost img {
-width: 100%;
-object-fit: cover;  
-opacity: 0.4;
+@media (min-width: 540px) and (max-width: 720px) {
+  .imagesAddPost img {
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+  }
+}
 
-} 
- }
-
-
- @media(min-width:360px) and (max-width:640px){
-
-  .nav-link{
+@media (min-width: 360px) and (max-width: 640px) {
+  .nav-link {
     left: 1.5rem;
   }
-
- }
+}
 
 /* end of responsive */

@@ -1,7 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
-import { Button, Dropdown, DropdownButton, Modal } from 'react-bootstrap';
+import {
+  Button,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  ButtonDropdown,
+} from "reactstrap";
+import { Modal } from "react-bootstrap"
 import { Link } from 'react-router-dom';
 import '../css/style.css'
 import baseUrl from "../baseurl";
@@ -13,6 +20,11 @@ const Home = () => {
   const [userSignin, setUserSignin] = useState({});
   const [userWriteBlogSignIn, setUserWriteBlogSignIn] = useState({});
   const [passwordShown, setPasswordShown] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const [dropdownOpen, setOpen] = useState(false);
+
+  const toggle = () => setOpen(!dropdownOpen);
+
 
   const myStorage = window.localStorage;
 
@@ -109,7 +121,7 @@ const Home = () => {
         }
       );
       myStorage.setItem("token", response.headers.auth)
-            myStorage.setItem("user", JSON.stringify(response.data));
+      myStorage.setItem("user", JSON.stringify(response.data));
 
       console.log(response)
 
@@ -132,6 +144,8 @@ const Home = () => {
 
   const signOutOnClick = () => {
     localStorage.removeItem("token")
+    window.location.replace("/");
+
   }
 
 
@@ -144,20 +158,77 @@ const Home = () => {
             <nav className="nav-list">
               <Link to="/" className="nav-link">
                 Home
-                </Link>
+              </Link>
               <Link to="/showPosts" className="nav-link">
                 Blogs
-                </Link>
+              </Link>
               {localStorage.getItem("token") ? (
-                <Link to="/addPosts" className="nav-link">Write Blog</Link>
+                <Link to="/addPosts" className="nav-link">
+                  Write Blog
+                </Link>
               ) : (
-                  <button onClick={handleWriteBlogsignIn} className="nav-link">
-                    Write Blog
-                  </button>
-                )}
-              <button onClick={signOutOnClick} className="nav-link">
-                Sign Out
+                <button onClick={handleWriteBlogsignIn} className="nav-link">
+                  Write Blog
                 </button>
+              )}
+
+              {localStorage.getItem("token") ? (
+                <div className="dropdown">
+                  {localStorage.getItem("token") ? (
+                    <button className="nav-link">
+                      <i className="fas fa-user" id="user"></i>
+                      {user && user.firstName}
+                    </button>
+                  ) : null}
+                  <div className="dropdown-content">
+                    <button onClick={signOutOnClick} className="nav-link">
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={handlesignIn} className="nav-link">
+                  Sign In
+                </button>
+              )}
+
+              {/* {localStorage.getItem("token") ? (
+                <ButtonDropdown
+                  isOpen={dropdownOpen}
+                  toggle={toggle}
+                  className="dropButt"
+                >
+                  <DropdownToggle caret className="dropButt">
+                    {localStorage.getItem("token") ? (
+                      <button className="nav-link">
+                        {user && user.firstName}
+                      </button>
+                    ) : null}
+                  </DropdownToggle>
+                  <DropdownMenu className="dropButt">
+                    <DropdownItem header className="dropButt">
+                      <button onClick={signOutOnClick} className="nav-link">
+                        Sign Out
+                      </button>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </ButtonDropdown>
+              ) : (
+                <button onClick={handlesignIn} className="nav-link">
+                  Sign In
+                </button>
+              )} */}
+
+              {/* {localStorage.getItem("token") ? (
+
+                <button onClick={signOutOnClick} className="nav-link">
+                  Sign Out
+                </button>
+              ) : (
+                <button onClick={handlesignIn} className="nav-link">
+                  Sign In
+                </button>
+              )} */}
             </nav>
           </div>
         </div>
@@ -167,18 +238,19 @@ const Home = () => {
           {/* <Link to="/addPosts" className="link">
               Start here
             </Link> */}
-          <DropdownButton
+          {/* <DropdownButton
             id="dropdown-basic-button"
             title="Register here"
             variant="secondary"
           >
             <Dropdown.Item className="dropdownButton" onClick={handlesignUp}>
               Sign Up
-              </Dropdown.Item>
-            <Dropdown.Item className="dropdownButton" onClick={handlesignIn}>
-              Sign In
-              </Dropdown.Item>
-          </DropdownButton>
+            </Dropdown.Item>
+          </DropdownButton> */}
+
+          <button className="register-button" onClick={handlesignUp}>
+            Register here
+          </button>
 
           {/* Modal for sign up */}
           <Modal
@@ -194,7 +266,7 @@ const Home = () => {
             <Modal.Body>
               <label htmlFor="firstName" className="labelClass">
                 First Name:
-                </label>
+              </label>
               <input
                 className="inputClass"
                 id="firstName"
@@ -205,7 +277,7 @@ const Home = () => {
 
               <label htmlFor="email" className="labelClass">
                 Email:
-                </label>
+              </label>
               <input
                 className="inputClass"
                 id="email"
@@ -215,7 +287,7 @@ const Home = () => {
               />
               <label htmlFor="password" className="labelClass">
                 Password:
-                </label>
+              </label>
               <input
                 type={passwordShown ? "text" : "password"}
                 className="inputClass"
@@ -227,7 +299,7 @@ const Home = () => {
               {/* <i class="fas fa-eye-slash"></i> */}
               <label htmlFor="password" className="labelClass">
                 Confirm Password:
-                </label>
+              </label>
               <input
                 type={passwordShown ? "text" : "password"}
                 name="confirmPassword"
@@ -239,7 +311,7 @@ const Home = () => {
               {/* <button onClick={togglePassword}>Show Password</button> */}
               <Button className="mt-5 modalButton" onClick={submitSignup}>
                 Sign up
-                </Button>
+              </Button>
             </Modal.Body>
 
             <Modal.Footer>
@@ -250,7 +322,7 @@ const Home = () => {
                 onClick={handlesignIn}
               >
                 Sign in here
-                </Button>
+              </Button>
             </Modal.Footer>
           </Modal>
 
@@ -267,7 +339,7 @@ const Home = () => {
             <Modal.Body className="modalBody">
               <label htmlFor="email" className="labelClass">
                 Email:
-                </label>
+              </label>
               <input
                 className="inputClass"
                 id="email"
@@ -277,7 +349,7 @@ const Home = () => {
               />
               <label htmlFor="password" className="labelClass">
                 Password:
-                </label>
+              </label>
               <input
                 type={passwordShown ? "text" : "password"}
                 className="inputClass"
@@ -286,16 +358,24 @@ const Home = () => {
                 placeholder="enter your password"
                 onChange={handleChangeSignin}
               />
-            </Modal.Body>
-            <Modal.Footer>
               <Button
                 variant="primary"
-                className="modalButtonSignIn"
+                className="modalButton"
                 style={{ marginRight: "auto" }}
                 onClick={submitSignin}
               >
                 Sign In
-                </Button>
+              </Button>
+            </Modal.Body>
+            <Modal.Footer>
+              <p className="modalP">Do not have an account?</p>
+              <Button
+                className="modalButton"
+                variant="primary"
+                onClick={handlesignIn}
+              >
+                Register here
+              </Button>
             </Modal.Footer>
           </Modal>
 
@@ -314,7 +394,7 @@ const Home = () => {
             <Modal.Body className="modalBody">
               <label htmlFor="email" className="labelClass">
                 Email:
-                </label>
+              </label>
               <input
                 className="inputClass"
                 id="email"
@@ -324,7 +404,7 @@ const Home = () => {
               />
               <label htmlFor="password" className="labelClass">
                 Password:
-                </label>
+              </label>
               <input
                 type={passwordShown ? "text" : "password"}
                 className="inputClass"
@@ -341,7 +421,7 @@ const Home = () => {
                 onClick={submitWriteBlogSignin}
               >
                 Sign In
-                </Button>
+              </Button>
             </Modal.Body>
             <Modal.Footer>
               <p className="modalP">Do not have an account?</p>
@@ -351,7 +431,7 @@ const Home = () => {
                 onClick={handlesignUp}
               >
                 Sign up here
-                </Button>
+              </Button>
             </Modal.Footer>
           </Modal>
 

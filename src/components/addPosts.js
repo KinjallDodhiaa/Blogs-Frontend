@@ -68,6 +68,7 @@ const AddPosts = (props) => {
 
   const signOutOnClick = () => {
     localStorage.removeItem("token")
+    window.location.replace('/')
   }
 
 
@@ -108,8 +109,8 @@ const AddPosts = (props) => {
             )}
 
             <form>
-              <h1>
-              Welcome {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).firstName} 
+              <h1 className="welcome">
+              Welcome {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).firstName}
               </h1>
 
 
