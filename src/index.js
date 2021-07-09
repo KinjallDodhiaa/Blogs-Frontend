@@ -17,6 +17,7 @@ const axios = require("axios").default;
 const App = () => {
   const [posts, setPosts] = useState([]);
   console.log(posts);
+  console.log(process.env.REACT_APP_ENV)
 
   useEffect(() => {
     sendGetRequest();
@@ -24,7 +25,9 @@ const App = () => {
 
   const sendGetRequest = async () => {
     try {
-      const response = await axios.get(baseUrl + "/posts");
+      const response = await axios.get(
+      "https://kinjals-blog.herokuapp.com/posts"
+      );
       setPosts(response.data);
       console.log(response.data);
     } catch (err) {

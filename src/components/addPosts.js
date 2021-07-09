@@ -26,7 +26,7 @@ const AddPosts = (props) => {
     // TODO
     try {
       const response = await axios.post(
-        baseUrl + "/posts/",
+        "https://kinjals-blog.herokuapp.com/posts/",
         {
           title: postTitle,
           content: postContent,
@@ -109,7 +109,7 @@ const AddPosts = (props) => {
 
             <form>
               <h1>
-              {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).firstName} 
+              Welcome {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).firstName} 
               </h1>
 
 

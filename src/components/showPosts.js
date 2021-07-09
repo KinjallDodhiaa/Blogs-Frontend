@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../css/style.css";
 import axios from "axios";
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from "react-bootstrap";
 import baseUrl from "../baseurl";
-
 
 const ShowPosts = (props) => {
   const [userSignup, setUserSignup] = useState({});
@@ -20,7 +19,6 @@ const ShowPosts = (props) => {
   const [writeBlogSignIn, setwriteBlogSignIn] = useState(false);
   const handleCloseWriteBlogSignIn = () => setwriteBlogSignIn(false);
   const handleWriteBlogsignIn = () => setwriteBlogSignIn(true);
-
 
   const handleChangeSignup = (evt) => {
     setUserSignup({
@@ -38,11 +36,13 @@ const ShowPosts = (props) => {
 
   const submitSignup = async () => {
     try {
-      await axios.post(baseUrl + "/users", userSignup).then((response) => {
-        myStorage.setItem("token", response.headers.auth);
-        myStorage.setItem("user", JSON.stringify(response.data));
-        console.log("signup" + response.data.firstName);
-      });
+      await axios
+        .post("https://kinjals-blog.herokuapp.com/users", userSignup)
+        .then((response) => {
+          myStorage.setItem("token", response.headers.auth);
+          myStorage.setItem("user", JSON.stringify(response.data));
+          console.log("signup" + response.data.firstName);
+        });
       window.location.replace("/");
     } catch (error) {
       console.log(error.response);
@@ -51,10 +51,13 @@ const ShowPosts = (props) => {
 
   const submitWriteBlogSignin = async () => {
     try {
-      const response = await axios.post(baseUrl + "/users/login", {
-        email: userWriteBlogSignIn.email,
-        password: userWriteBlogSignIn.password,
-      });
+      const response = await axios.post(
+        "https://kinjals-blog.herokuapp.com/users/login",
+        {
+          email: userWriteBlogSignIn.email,
+          password: userWriteBlogSignIn.password,
+        }
+      );
       myStorage.setItem("token", response.headers.auth);
       myStorage.setItem("user", JSON.stringify(response.data));
 
@@ -68,14 +71,9 @@ const ShowPosts = (props) => {
     }
   };
 
-
-
-
-
   const signOutOnClick = () => {
-    localStorage.removeItem("token")
-  }
-
+    localStorage.removeItem("token");
+  };
 
   return (
     <section className="section-2">
@@ -117,11 +115,7 @@ const ShowPosts = (props) => {
                     <h2>{post.title}</h2>
                   </Link>
 
-                  <p>
-                    posted by
-                    {localStorage.getItem("user") &&
-                      JSON.parse(localStorage.getItem("user")).firstName}
-                  </p>
+                  <p>posted by {post.userId.firstName}</p>
                 </>
               ))
             )}

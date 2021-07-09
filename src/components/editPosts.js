@@ -39,11 +39,13 @@ const EditPosts = (props) => {
 
   const submitSignup = async () => {
     try {
-      await axios.post(baseUrl + "/users", userSignup).then((response) => {
-        myStorage.setItem("token", response.headers.auth);
-        myStorage.setItem("user", JSON.stringify(response.data));
-        console.log("signup" + response.data.firstName);
-      });
+      await axios
+        .post("https://kinjals-blog.herokuapp.com/users", userSignup)
+        .then((response) => {
+          myStorage.setItem("token", response.headers.auth);
+          myStorage.setItem("user", JSON.stringify(response.data));
+          console.log("signup" + response.data.firstName);
+        });
       window.location.replace("/");
     } catch (error) {
       console.log(error.response);
@@ -52,10 +54,13 @@ const EditPosts = (props) => {
 
   const submitWriteBlogSignin = async () => {
     try {
-      const response = await axios.post(baseUrl + "/users/login", {
-        email: userWriteBlogSignIn.email,
-        password: userWriteBlogSignIn.password,
-      });
+      const response = await axios.post(
+        "https://kinjals-blog.herokuapp.com/users/login",
+        {
+          email: userWriteBlogSignIn.email,
+          password: userWriteBlogSignIn.password,
+        }
+      );
       myStorage.setItem("token", response.headers.auth);
       myStorage.setItem("user", JSON.stringify(response.data));
 
@@ -94,16 +99,16 @@ const EditPosts = (props) => {
     var data = { title, content, name };
     try {
       axios
-        .put(`${baseUrl}/posts/${id}`, data, {
+        .put(`https://kinjals-blog.herokuapp.com/posts/${id}`, data, {
           headers: {
             auth: localStorage.getItem("token"),
           },
         })
         .then((response) => {
           props.sendGetRequest();
-          response.data === "noauth" ? 
-          alert("Not authorize to update others post") :
-          window.location.replace("/showPosts");
+          response.data === "noauth"
+            ? alert("Not authorize to update others post")
+            : window.location.replace("/showPosts");
         });
     } catch (error) {
       console.log(error);

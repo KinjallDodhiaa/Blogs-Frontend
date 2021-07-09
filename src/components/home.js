@@ -58,14 +58,12 @@ const Home = () => {
     try {
 
       await axios
-        .post(baseUrl + "/users", userSignup)
+        .post("https://kinjals-blog.herokuapp.com/users", userSignup)
         .then((response) => {
-          myStorage.setItem("token", response.headers.auth)
-          myStorage.setItem("user", JSON.stringify(response.data))
-          console.log("signup" + response.data.firstName)
-
-        }
-        );
+          myStorage.setItem("token", response.headers.auth);
+          myStorage.setItem("user", JSON.stringify(response.data));
+          console.log("signup" + response.data.firstName);
+        });
       window.location.replace("/");
 
 
@@ -78,10 +76,13 @@ const Home = () => {
 
   const submitSignin = async () => {
     try {
-      const response = await axios.post(baseUrl + "/users/login", {
-        email: userSignin.email,
-        password: userSignin.password,
-      });
+      const response = await axios.post(
+        "https://kinjals-blog.herokuapp.com/users/login",
+        {
+          email: userSignin.email,
+          password: userSignin.password,
+        }
+      );
       myStorage.setItem("token", response.headers.auth)
       myStorage.setItem(
         "user",
@@ -100,10 +101,13 @@ const Home = () => {
 
   const submitWriteBlogSignin = async () => {
     try {
-      const response = await axios.post(baseUrl + "/users/login", {
-        email: userWriteBlogSignIn.email,
-        password: userWriteBlogSignIn.password,
-      });
+      const response = await axios.post(
+        "https://kinjals-blog.herokuapp.com/users/login",
+        {
+          email: userWriteBlogSignIn.email,
+          password: userWriteBlogSignIn.password,
+        }
+      );
       myStorage.setItem("token", response.headers.auth)
             myStorage.setItem("user", JSON.stringify(response.data));
 

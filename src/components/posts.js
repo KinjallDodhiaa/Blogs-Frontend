@@ -37,11 +37,13 @@ const Posts = (props) => {
 
   const submitSignup = async () => {
     try {
-      await axios.post(baseUrl + "/users", userSignup).then((response) => {
-        myStorage.setItem("token", response.headers.auth);
-        myStorage.setItem("user", JSON.stringify(response.data));
-        console.log("signup" + response.data.firstName);
-      });
+      await axios
+        .post("https://kinjals-blog.herokuapp.com/users", userSignup)
+        .then((response) => {
+          myStorage.setItem("token", response.headers.auth);
+          myStorage.setItem("user", JSON.stringify(response.data));
+          console.log("signup" + response.data.firstName);
+        });
       window.location.replace("/");
     } catch (error) {
       console.log(error.response);
@@ -50,10 +52,13 @@ const Posts = (props) => {
 
   const submitWriteBlogSignin = async () => {
     try {
-      const response = await axios.post(baseUrl + "/users/login", {
-        email: userWriteBlogSignIn.email,
-        password: userWriteBlogSignIn.password,
-      });
+      const response = await axios.post(
+        "https://kinjals-blog.herokuapp.com/users/login",
+        {
+          email: userWriteBlogSignIn.email,
+          password: userWriteBlogSignIn.password,
+        }
+      );
       myStorage.setItem("token", response.headers.auth);
       myStorage.setItem("user", JSON.stringify(response.data));
 
@@ -78,17 +83,16 @@ const Posts = (props) => {
   const deletePostsOnClick = async (id) => {
     try {
       axios
-        .delete(`${baseUrl}/posts/${id}`, {
+        .delete(`https://kinjals-blog.herokuapp.com/posts/${id}`, {
           headers: {
             auth: localStorage.getItem("token"),
           },
         })
         .then((response) => {
           props.sendGetRequest();
-          response.data === "notauth" ?
-        alert("Not authorize to delete others post") :
-        window.location.replace("/showPosts")
-          
+          response.data === "notauth"
+            ? alert("Not authorize to delete others post")
+            : window.location.replace("/showPosts");
         });
     } catch (error) {
       console.log(error);
